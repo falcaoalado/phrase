@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Person implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 
@@ -47,4 +48,19 @@ public class Person implements Serializable {
 		return "Person [id=" + id + ", name=" + name + "]";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		else if (obj instanceof Person) {
+			return ((Person) obj).getName().equals(this.getName());
+		}
+		
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getName().hashCode();
+	}
 }

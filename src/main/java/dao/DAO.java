@@ -11,12 +11,12 @@ public abstract class DAO {
 	PreparedStatement preparedStatement;
 	ResultSet resultSet;
 
-	public void openSession() throws Exception {
-		Class.forName("com.mysql.jdbc.Driver");
-		this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBPHRASE", "root", "1234");
+	public void open() throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBPHRASE?useSSL=false", "root", "1234");
 	}
 
-	public void closeSession() throws Exception {
+	public void close() throws Exception {
 		this.connection.close();
 	}
 }

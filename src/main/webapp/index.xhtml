@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<div>
+		<p:messages for=":formPerson">
+			<p:autoUpdate />
+		</p:messages>
+		<p:messages for=":formPhrase">
+			<p:autoUpdate />
+		</p:messages>
+	</div>
+	<div>
+		<p:panel header="Register person">
+			<h:form id="formPerson">
+				<p:panelGrid columns="2">
+					<h:outputText value="Name" />
+					<p:inputText type="text" value="#{personMB.person.name}" />
+				</p:panelGrid>
+				<p:commandButton ajax="true" update=":formPerson, :formPhrase"
+					value="Register" action="#{personMB.registerPerson}" />
+			</h:form>
+		</p:panel>
+	</div>
+
+	<div>
+		<p:panel header="Register phrase">
+			<h:form id="formPhrase">
+				<p:messages></p:messages>
+				<p:panelGrid columns="2">
+					<h:outputText value="Person ID" />
+					<p:selectOneMenu id="personn" value="#{personMB.selectedPerson}">
+						<f:selectItem itemLabel="Select one person" itemValue="" />
+						<f:selectItems value="#{personMB.people}" var="person"
+							itemLabel="#{person.name}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Phrase" />
+					<p:inputText value="#{personMB.phrase.phrase}" />
+				</p:panelGrid>
+
+				<p:commandButton action="#{personMB.registerPhrase}" ajax="true"
+					update=":formPhrase" value="Register phrase to person" />
+			</h:form>
+		</p:panel>
+	</div>
+
+	<div>
+		<p:panel header="People">
+			<p:dataTable value="#{personMB.people}" var="person">
+				<p:column headerText="Name">
+					<h:outputText value="#{person.name}"/>
+				</p:column>
+				
+				<p:column headerText="ID">
+					<h:outputText value="#{person.id}"/>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</div>
+</body>
+</html>
