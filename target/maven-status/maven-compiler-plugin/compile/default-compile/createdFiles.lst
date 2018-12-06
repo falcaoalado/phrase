@@ -1,5 +1,5 @@
 dao/DAO.class
-entity/Person.class
 dao/PersonDAO.class
+entity/Person.class
 entity/Phrase.class
 dao/PhraseDAO.class

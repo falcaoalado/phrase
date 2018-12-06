@@ -24,18 +24,28 @@ public class PersonMB {
 	private Phrase phrase;
 
 	private Person selectedPerson;
+	private Person selectedPersonPhrases;
 
 	@PostConstruct
 	public void init() {
 		this.person = new Person();
 		this.phrase = new Phrase();
 		this.selectedPerson = new Person();
+
 		try {
 			this.people = new PersonDAO().findAll();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
+	}
+
+	public Person getSelectedPersonPhrases() {
+		return selectedPersonPhrases;
+	}
+
+	public void setSelectedPersonPhrases(Person selectedPersonPhrases) {
+		this.selectedPersonPhrases = selectedPersonPhrases;
 	}
 
 	public Person getSelectedPerson() {
@@ -110,5 +120,22 @@ public class PersonMB {
 			this.phrase = new Phrase();
 			this.selectedPerson = new Person();
 		}
+	}
+
+	public void returnPhrasesFromPerson() {
+		
+		try {
+			if (this.selectedPersonPhrases != null) {
+				
+				Person person = new Person();
+				person = new PhraseDAO().findPhrasesFromPerson(selectedPersonPhrases);
+				System.out.println(person.getPhrases().size());
+				this.selectedPersonPhrases = person;
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+
 	}
 }

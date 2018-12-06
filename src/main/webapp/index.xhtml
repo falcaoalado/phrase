@@ -41,7 +41,7 @@
 					</p:selectOneMenu>
 
 					<h:outputText value="Phrase" />
-					<p:inputText value="#{personMB.phrase.phrase}" />
+					<p:inputText required="true" requiredMessage="Please, enter with your phrase" value="#{personMB.phrase.phrase}" />
 				</p:panelGrid>
 
 				<p:commandButton action="#{personMB.registerPhrase}" ajax="true"
@@ -51,16 +51,31 @@
 	</div>
 
 	<div>
-		<p:panel header="People">
-			<p:dataTable value="#{personMB.people}" var="person">
-				<p:column headerText="Name">
-					<h:outputText value="#{person.name}"/>
-				</p:column>
+		<p:panel header="Find phrases from person">
+			<h:form id="formPhrases">
+				<p:panelGrid columns="2">
+					<h:outputText value="Choose the person that you want to see phrases" />
+					<p:selectOneMenu id="personPhrase" value="#{personMB.selectedPersonPhrases}">
+						<f:selectItem itemLabel="Select one person" itemValue="" />
+						<f:selectItems value="#{personMB.people}" var="person" itemLabel="#{person.name}"/>
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:commandButton ajax="true" update=":phrases" action="#{personMB.returnPhrasesFromPerson}" value="Search..."/>
+			</h:form>
+		</p:panel>
+	</div>
+	
+		<div>
+		<p:panel header="Phrases">
+			<h:form id="phrases">
+				<p:dataTable rendered="#{personMB.selectedPersonPhrases.phrases.size() ne 0 and personMB.selectedPersonPhrases != null}" var="phrase" value="#{personMB.selectedPersonPhrases.phrases}">
+					<p:column headerText="Phrase">
+						<p:outputLabel value="#{phrase.phrase}"/>
+					</p:column>
+				</p:dataTable>
 				
-				<p:column headerText="ID">
-					<h:outputText value="#{person.id}"/>
-				</p:column>
-			</p:dataTable>
+				<p:outputLabel style="text-align: center; font-weight: bolder;" rendered="#{personMB.selectedPersonPhrases.phrases.size() eq 0}" value="0 phrases found"/>
+			</h:form>
 		</p:panel>
 	</div>
 </body>
