@@ -1,6 +1,7 @@
 /home/falke/alura/phrase/src/main/java/entity/Phrase.java
 /home/falke/alura/phrase/src/main/java/dao/PersonDAO.java
 /home/falke/alura/phrase/src/main/java/entity/Person.java
+/home/falke/alura/phrase/src/main/java/utils/PersonConverter.java
 /home/falke/alura/phrase/src/main/java/dao/DAO.java
 /home/falke/alura/phrase/src/main/java/managedbean/PersonMB.java
 /home/falke/alura/phrase/src/main/java/dao/PhraseDAO.java
